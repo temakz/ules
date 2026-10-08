@@ -3,6 +3,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
+    "dev": "npm --prefix app run dev",
     "demo": "ts-node scripts/demo.ts",
     "lint": "prettier */*.ts \"*/**/*{.js,.ts}\" --check",
     "lint:fix": "prettier */*.ts \"*/**/*{.js,.ts}\" -w"
