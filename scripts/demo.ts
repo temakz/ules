@@ -123,7 +123,7 @@ async function waitForCluster(ts: number) {
   let now = await clusterTime();
   if (now < ts) console.log(`  waiting ${ts - now}s for the cluster clock`);
   while (now < ts) {
-    await new Promise((r) => setTimeout(r, 2000));
+    await new Promise((r) => setTimeout(r, (ts - now + 1) * 1000));
     now = await clusterTime();
   }
 }
@@ -389,11 +389,16 @@ async function transferExpectingHalt(from: Person, to: Person, qty: bigint) {
   const sig = await connection.sendRawTransaction(tx.serialize(), {
     skipPreflight: true,
   });
-  await connection.confirmTransaction(sig, "confirmed");
-  const landed = await connection.getTransaction(sig, {
-    commitment: "confirmed",
-    maxSupportedTransactionVersion: 0,
-  });
+  // Polling instead of confirmTransaction, which rejects with a bare error
+  // object when the failed transaction lands before its subscription starts.
+  let landed = null;
+  for (let i = 0; !landed && i < 60; i++) {
+    await new Promise((r) => setTimeout(r, 1000));
+    landed = await connection.getTransaction(sig, {
+      commitment: "confirmed",
+      maxSupportedTransactionVersion: 0,
+    });
+  }
   const logs = landed?.meta?.logMessages?.join("\n") ?? "";
   step(
     `${from.name} tries to transfer ${qty} bond to ${to.name}: rejected as expected`,
