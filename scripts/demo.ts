@@ -473,6 +473,10 @@ async function runAction(
   for (const { p, qty } of atRecord) {
     const wallet = p.kp.publicKey;
     const kztBefore = await kztBalance(wallet);
+    const holderAccount = await program.account.holder.fetch(holderPda(wallet));
+    const fromSnapshot = holderAccount.snaps.some(
+      (snap) => snap.actionId.toNumber() === id,
+    );
     const settleSig = await program.methods
       .settle()
       .accountsPartial({
@@ -495,7 +499,7 @@ async function runAction(
     const amount = BigInt(receipt.amount.toString());
     const expected = entitlement(kind, qty, nominal, principal);
     step(
-      `Crank settles ${p.name}: ${receipt.qty} bonds on record date, ${kzt(amount)}`,
+      `Crank settles ${p.name}: ${receipt.qty} bonds on record date${fromSnapshot ? " (snapshot)" : ""}, ${kzt(amount)}`,
       settleSig,
     );
     check(
@@ -512,6 +516,7 @@ async function runAction(
       wallet: wallet.toBase58(),
       receipt: receiptPda(id, wallet).toBase58(),
       qty: qty.toString(),
+      fromSnapshot,
       amount: amount.toString(),
       signature: settleSig,
     });
