@@ -71,17 +71,11 @@ pub fn handle_transfer_hook(ctx: Context<TransferHook>, amount: u64) -> Result<(
         .checked_sub(amount)
         .ok_or(UlesError::MathOverflow)?;
 
-    let fixed = bond
-        .open_actions
-        .iter()
-        .filter(|a| a.id != 0 && now >= a.record_ts);
-    for action in fixed {
-        if self_transfer {
-            sender.record_snap(bond, action.id, accounts.source.amount)?;
-        } else {
-            sender.record_snap(bond, action.id, sender_before)?;
-            receiver.record_snap(bond, action.id, receiver_before)?;
-        }
+    if self_transfer {
+        sender.snapshot_fixed(bond, now, accounts.source.amount)?;
+    } else {
+        sender.snapshot_fixed(bond, now, sender_before)?;
+        receiver.snapshot_fixed(bond, now, receiver_before)?;
     }
 
     store_holder(&accounts.sender_holder, &sender)?;

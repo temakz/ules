@@ -57,9 +57,21 @@ impl Holder {
             .map(|s| s.balance)
     }
 
+    // Called right before the holder's balance changes: by the transfer hook and
+    // by settle before a redemption burn. Records the balance for every open
+    // action whose record date has passed and which has no snapshot yet.
+    pub fn snapshot_fixed(&mut self, bond: &Bond, now: i64, balance: u64) -> Result<()> {
+        for action in bond.open_actions {
+            if action.id != 0 && now >= action.record_ts {
+                self.record_snap(bond, action.id, balance)?;
+            }
+        }
+        Ok(())
+    }
+
     // A slot is free once its action is no longer open, so four slots always
     // cover four open actions without any cleanup instruction.
-    pub fn record_snap(&mut self, bond: &Bond, action_id: u64, balance: u64) -> Result<()> {
+    fn record_snap(&mut self, bond: &Bond, action_id: u64, balance: u64) -> Result<()> {
         if self.snap(action_id).is_some() {
             return Ok(());
         }
