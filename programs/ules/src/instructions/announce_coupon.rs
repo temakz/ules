@@ -39,7 +39,9 @@ pub fn handle_announce_coupon(ctx: Context<AnnounceCoupon>, record_ts: i64) -> R
         id,
         kind: ActionKind::Coupon,
         record_ts,
-        pay_end_ts: record_ts + PAY_WINDOW_SECS,
+        pay_end_ts: record_ts
+            .checked_add(bond.pay_window_secs)
+            .ok_or(UlesError::MathOverflow)?,
         principal_per_bond: 0,
         nominal_at_announce: bond.nominal,
         coupon_rate_bps: bond.coupon_rate_bps,

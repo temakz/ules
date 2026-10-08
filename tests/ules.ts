@@ -1,6 +1,7 @@
 import * as anchor from "@anchor-lang/core";
 import { BN, Program } from "@anchor-lang/core";
 import {
+  createAccount,
   createAssociatedTokenAccountIdempotent,
   createMint,
   createTransferCheckedWithTransferHookInstruction,
@@ -73,6 +74,7 @@ class TestBond {
         couponRateBps: RATE_BPS,
         couponsPerYear: COUPONS_PER_YEAR,
         maturityTs: new BN(maturity),
+        payWindowSecs: new BN(3600),
       })
       .accountsPartial({
         issuer: payer.publicKey,
@@ -138,12 +140,17 @@ class TestBond {
     return id.toNumber();
   }
 
-  async transfer(from: Keypair, to: PublicKey, qty: number) {
+  async transfer(
+    from: Keypair,
+    to: PublicKey,
+    qty: number,
+    destination = this.ata(to),
+  ) {
     const ix = await createTransferCheckedWithTransferHookInstruction(
       connection,
       this.ata(from.publicKey),
       this.mint,
-      this.ata(to),
+      destination,
       from.publicKey,
       BigInt(qty),
       0,
@@ -230,6 +237,41 @@ describe("ules", () => {
       "HolderNotRegistered",
     );
     expect(await b.balance(alice.publicKey)).to.equal(10);
+  });
+
+  it("rejects a transfer to a token account that is not the holder ATA", async () => {
+    const b = await bondWith([
+      [alice, 10],
+      [bob, 0],
+    ]);
+    const side = await createAccount(
+      connection,
+      payer,
+      b.mint,
+      bob.publicKey,
+      Keypair.generate(),
+      {},
+      TOKEN_2022_PROGRAM_ID,
+    );
+    await expectError(
+      b.transfer(alice, bob.publicKey, 1, side),
+      "NotAssociatedAccount",
+    );
+  });
+
+  it("registers a wallet whose ATA was created by someone else", async () => {
+    const b = await TestBond.create(settlementMint);
+    await createAssociatedTokenAccountIdempotent(
+      connection,
+      payer,
+      b.mint,
+      dave.publicKey,
+      {},
+      TOKEN_2022_PROGRAM_ID,
+    );
+    await b.register(dave.publicKey);
+    await b.issue(dave.publicKey, 2);
+    expect(await b.balance(dave.publicKey)).to.equal(2);
   });
 
   it("rejects issue after issuance closes", async () => {

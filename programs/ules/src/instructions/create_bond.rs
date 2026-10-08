@@ -28,6 +28,7 @@ pub struct BondParams {
     pub coupon_rate_bps: u16,
     pub coupons_per_year: u8,
     pub maturity_ts: i64,
+    pub pay_window_secs: i64,
 }
 
 #[derive(Accounts)]
@@ -101,7 +102,8 @@ pub fn handle_create_bond(ctx: Context<CreateBond>, params: BondParams) -> Resul
         params.nominal > 0
             && params.coupon_rate_bps > 0
             && params.coupons_per_year > 0
-            && params.maturity_ts > now,
+            && params.maturity_ts > now
+            && params.pay_window_secs > 0,
         UlesError::InvalidParams
     );
 
@@ -172,6 +174,7 @@ pub fn handle_create_bond(ctx: Context<CreateBond>, params: BondParams) -> Resul
         coupon_rate_bps: params.coupon_rate_bps,
         coupons_per_year: params.coupons_per_year,
         maturity_ts: params.maturity_ts,
+        pay_window_secs: params.pay_window_secs,
         supply: 0,
         issuance_closed: false,
         halted_from_ts: None,

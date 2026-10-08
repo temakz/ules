@@ -19,6 +19,7 @@ pub struct Bond {
     pub coupon_rate_bps: u16,
     pub coupons_per_year: u8,
     pub maturity_ts: i64,
+    pub pay_window_secs: i64,
     pub supply: u64,
     pub issuance_closed: bool,
     pub halted_from_ts: Option<i64>,
