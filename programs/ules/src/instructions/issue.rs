@@ -49,6 +49,9 @@ pub fn handle_issue(ctx: Context<Issue>, qty: u64) -> Result<()> {
     )?;
 
     let bond = &mut ctx.accounts.bond;
-    bond.supply = bond.supply.checked_add(qty).ok_or(UlesError::MathOverflow)?;
+    bond.supply = bond
+        .supply
+        .checked_add(qty)
+        .ok_or(UlesError::MathOverflow)?;
     Ok(())
 }

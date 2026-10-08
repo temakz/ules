@@ -5,10 +5,7 @@ use anchor_lang::{
 use anchor_spl::{
     token_2022::{
         initialize_mint2,
-        spl_token_2022::{
-            extension::ExtensionType,
-            state::Mint as MintState,
-        },
+        spl_token_2022::{extension::ExtensionType, state::Mint as MintState},
         InitializeMint2, Token2022,
     },
     token_2022_extensions::{
@@ -17,7 +14,9 @@ use anchor_spl::{
     },
     token_interface::Mint,
 };
-use spl_tlv_account_resolution::{account::ExtraAccountMeta, seeds::Seed, state::ExtraAccountMetaList};
+use spl_tlv_account_resolution::{
+    account::ExtraAccountMeta, seeds::Seed, state::ExtraAccountMetaList,
+};
 use spl_transfer_hook_interface::instruction::ExecuteInstruction;
 
 use crate::{constants::*, error::UlesError, state::*};

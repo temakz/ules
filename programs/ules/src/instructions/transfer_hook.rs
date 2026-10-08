@@ -2,7 +2,9 @@ use anchor_lang::prelude::*;
 use anchor_spl::{
     associated_token::get_associated_token_address_with_program_id,
     token_2022::spl_token_2022::{
-        extension::{transfer_hook::TransferHookAccount, BaseStateWithExtensions, StateWithExtensions},
+        extension::{
+            transfer_hook::TransferHookAccount, BaseStateWithExtensions, StateWithExtensions,
+        },
         state::Account as TokenAccountState,
     },
     token_interface::{Mint, TokenAccount},
