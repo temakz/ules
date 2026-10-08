@@ -25,7 +25,7 @@ pub struct RegisterHolder<'info> {
     )]
     pub holder: Account<'info, Holder>,
     #[account(
-        init,
+        init_if_needed,
         payer = registrar,
         associated_token::mint = mint,
         associated_token::authority = wallet,
