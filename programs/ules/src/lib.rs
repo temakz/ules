@@ -27,6 +27,10 @@ pub mod ules {
         instructions::issue::handle_issue(ctx, qty)
     }
 
+    pub fn announce_coupon(ctx: Context<AnnounceCoupon>, record_ts: i64) -> Result<()> {
+        instructions::announce_coupon::handle_announce_coupon(ctx, record_ts)
+    }
+
     #[instruction(discriminator = ExecuteInstruction::SPL_DISCRIMINATOR_SLICE)]
     pub fn transfer_hook(ctx: Context<TransferHook>, amount: u64) -> Result<()> {
         instructions::transfer_hook::handle_transfer_hook(ctx, amount)
