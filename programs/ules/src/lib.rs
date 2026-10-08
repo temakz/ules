@@ -48,6 +48,18 @@ pub mod ules {
         instructions::announce::handle_announce_redemption(ctx, record_ts)
     }
 
+    pub fn fund(ctx: Context<Fund>) -> Result<()> {
+        instructions::fund::handle_fund(ctx)
+    }
+
+    pub fn settle(ctx: Context<Settle>) -> Result<()> {
+        instructions::settle::handle_settle(ctx)
+    }
+
+    pub fn close_action(ctx: Context<CloseAction>) -> Result<()> {
+        instructions::close_action::handle_close_action(ctx)
+    }
+
     #[instruction(discriminator = ExecuteInstruction::SPL_DISCRIMINATOR_SLICE)]
     pub fn transfer_hook(ctx: Context<TransferHook>, amount: u64) -> Result<()> {
         instructions::transfer_hook::handle_transfer_hook(ctx, amount)
