@@ -12,3 +12,4 @@ test-ledger
 !package.json
 !package-lock.json
 !tsconfig.json
+!demo-output/*.json
