@@ -102,7 +102,37 @@ pub struct Action {
     pub supply_at_record: u64,
     pub funded: u64,
     pub paid: u64,
+    pub settled_qty: u64,
     pub receipts: u32,
     pub status: ActionStatus,
     pub bump: u8,
+}
+
+impl Action {
+    pub fn entitlement(&self, qty: u64) -> Result<u64> {
+        let qty = qty as u128;
+        let nominal = self.nominal_at_announce as u128;
+        let coupon =
+            qty * nominal * self.coupon_rate_bps as u128 / (10_000 * self.coupons_per_year as u128);
+        let amount = match self.kind {
+            ActionKind::Coupon => coupon,
+            ActionKind::PartialRedemption => qty * self.principal_per_bond as u128,
+            ActionKind::Redemption => qty * nominal + coupon,
+        };
+        u64::try_from(amount).map_err(|_| UlesError::MathOverflow.into())
+    }
+
+    pub fn total_due(&self) -> Result<u64> {
+        self.entitlement(self.supply_at_record)
+    }
+}
+
+#[account]
+#[derive(InitSpace)]
+pub struct Receipt {
+    pub action: Pubkey,
+    pub wallet: Pubkey,
+    pub qty: u64,
+    pub amount: u64,
+    pub ts: i64,
 }

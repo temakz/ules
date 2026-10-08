@@ -1,5 +1,6 @@
 pub mod constants;
 pub mod error;
+pub mod events;
 pub mod instructions;
 pub mod state;
 
@@ -27,8 +28,24 @@ pub mod ules {
         instructions::issue::handle_issue(ctx, qty)
     }
 
-    pub fn announce_coupon(ctx: Context<AnnounceCoupon>, record_ts: i64) -> Result<()> {
-        instructions::announce_coupon::handle_announce_coupon(ctx, record_ts)
+    pub fn announce_coupon(ctx: Context<Announce>, record_ts: i64) -> Result<()> {
+        instructions::announce::handle_announce_coupon(ctx, record_ts)
+    }
+
+    pub fn announce_partial_redemption(
+        ctx: Context<Announce>,
+        record_ts: i64,
+        principal_per_bond: u64,
+    ) -> Result<()> {
+        instructions::announce::handle_announce_partial_redemption(
+            ctx,
+            record_ts,
+            principal_per_bond,
+        )
+    }
+
+    pub fn announce_redemption(ctx: Context<Announce>, record_ts: i64) -> Result<()> {
+        instructions::announce::handle_announce_redemption(ctx, record_ts)
     }
 
     #[instruction(discriminator = ExecuteInstruction::SPL_DISCRIMINATOR_SLICE)]

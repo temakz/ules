@@ -24,4 +24,20 @@ pub enum UlesError {
     TooManyOpenActions,
     #[msg("No free snapshot slot")]
     NoFreeSnapSlot,
+    #[msg("Principal must be above zero and below the nominal")]
+    InvalidPrincipal,
+    #[msg("Redemption is already announced")]
+    AlreadyRedeeming,
+    #[msg("Record date must be before the redemption record date")]
+    AfterRedemption,
+    #[msg("Action is not in the expected status")]
+    InvalidStatus,
+    #[msg("Record date has not been reached")]
+    RecordDateNotReached,
+    #[msg("Payment window is closed")]
+    PaymentWindowClosed,
+    #[msg("Holder had no bonds on the record date")]
+    NothingToSettle,
+    #[msg("Action can be closed after the payment window or once everyone is paid")]
+    CloseTooEarly,
 }
