@@ -4,6 +4,8 @@ pub mod instructions;
 pub mod state;
 
 use anchor_lang::prelude::*;
+use spl_discriminator::SplDiscriminate;
+use spl_transfer_hook_interface::instruction::ExecuteInstruction;
 
 pub use instructions::*;
 
@@ -23,5 +25,10 @@ pub mod ules {
 
     pub fn issue(ctx: Context<Issue>, qty: u64) -> Result<()> {
         instructions::issue::handle_issue(ctx, qty)
+    }
+
+    #[instruction(discriminator = ExecuteInstruction::SPL_DISCRIMINATOR_SLICE)]
+    pub fn transfer_hook(ctx: Context<TransferHook>, amount: u64) -> Result<()> {
+        instructions::transfer_hook::handle_transfer_hook(ctx, amount)
     }
 }

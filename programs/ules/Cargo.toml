@@ -22,6 +22,7 @@ custom-panic = []
 [dependencies]
 anchor-lang = "=1.1.2"
 anchor-spl = { version = "=1.1.2", features = ["token_2022", "token_2022_extensions", "associated_token"] }
+spl-discriminator = "0.5.2"
 spl-tlv-account-resolution = "0.11.4"
 spl-transfer-hook-interface = "2.1.0"
 
