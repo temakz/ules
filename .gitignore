@@ -13,3 +13,4 @@ test-ledger
 !package-lock.json
 !tsconfig.json
 !demo-output/*.json
+!app/src/idl/*.json
