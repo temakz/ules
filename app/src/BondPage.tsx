@@ -36,6 +36,24 @@ export function BondPage({ bond }: { bond: BondView }) {
   return (
     <>
       <section>
+        <h2>How it works</h2>
+        <ol className="how">
+          <li>
+            Every holder is registered, and every bond transfer passes through
+            the program's transfer hook.
+          </li>
+          <li>
+            After the record date, the hook saves a holder's balance the first
+            time it changes. Holders who never move their bonds cost nothing.
+          </li>
+          <li>
+            The issuer funds the action, anyone can trigger the payout, and each
+            holder gets an on-chain receipt.
+          </li>
+        </ol>
+      </section>
+
+      <section>
         <h2>Terms</h2>
         <dl className="terms">
           <div>

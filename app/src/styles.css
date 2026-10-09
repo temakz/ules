@@ -101,6 +101,30 @@ dd {
   font-variant-numeric: tabular-nums;
 }
 
+.how {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: how;
+  display: grid;
+  gap: 10px;
+  max-width: 680px;
+}
+
+.how li {
+  counter-increment: how;
+  display: grid;
+  grid-template-columns: 28px 1fr;
+}
+
+.how li::before {
+  content: counter(how);
+  color: var(--accent);
+  font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  font-size: 18px;
+  line-height: 1.4;
+}
+
 .terms {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
