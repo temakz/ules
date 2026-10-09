@@ -8,7 +8,7 @@ import {
   type HolderReceipts,
   type ReceiptView,
 } from "./chain";
-import { demo, demoReceipt } from "./demo";
+import { demo, demoReceipt, transfersAfterRecord } from "./demo";
 import { almaty, formula, kindLabel, kzt, shortAddress, txUrl } from "./format";
 
 const names = Object.keys(demo.holders);
@@ -24,6 +24,24 @@ function missingText(a: ActionView, registered: boolean): string {
   return a.settledQty === a.supplyAtRecord
     ? "Not a holder on the record date"
     : "Not paid within the payment window";
+}
+
+const SNAPSHOT_REASON =
+  "The transfer hook saved this holder's balance at the record date, so the payment follows the record-date register.";
+
+function snapshotNote(actionId: number, name: string | undefined, qty: bigint) {
+  const moves = name ? transfersAfterRecord(actionId, name) : [];
+  if (moves.length === 0) {
+    return `Bonds moved after the record date. ${SNAPSHOT_REASON}`;
+  }
+  const what = moves
+    .map((t) =>
+      t.from === name
+        ? `sent ${t.qty} to ${t.to}`
+        : `received ${t.qty} from ${t.from}`,
+    )
+    .join(" and ");
+  return `${name} held ${qty} bonds at the record date, then ${what}. ${SNAPSHOT_REASON}`;
 }
 
 function SettleLink({
@@ -151,6 +169,11 @@ export function HolderPage({ bond }: { bond: BondView }) {
                         </span>
                         <strong className="num">{kzt(r.amount)}</strong>
                       </div>
+                      {fromSnapshot && (
+                        <p className="snapshot-note">
+                          {snapshotNote(a.id, name, r.qty)}
+                        </p>
+                      )}
                       <p className="formula mono">
                         {formula(a, r.qty, r.amount)}
                       </p>

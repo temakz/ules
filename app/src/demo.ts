@@ -12,6 +12,14 @@ export interface DemoAction {
   signatures: { announce: string; fund: string; close: string };
 }
 
+export interface DemoTransfer {
+  from: string;
+  to: string;
+  qty: number;
+  signature: string;
+  afterRecordOf: number | null;
+}
+
 export interface DemoRun {
   cluster: string;
   programId: string;
@@ -20,6 +28,7 @@ export interface DemoRun {
   bond: string;
   holders: Record<string, string>;
   actions: DemoAction[];
+  transfers?: DemoTransfer[];
 }
 
 const runs = import.meta.glob<DemoRun>("../../demo-output/devnet-*.json", {
@@ -35,6 +44,15 @@ export const demo: DemoRun = runs[latest];
 
 export function demoAction(id: number): DemoAction | undefined {
   return demo.actions.find((a) => a.id === id);
+}
+
+export function transfersAfterRecord(
+  actionId: number,
+  name: string,
+): DemoTransfer[] {
+  return (demo.transfers ?? []).filter(
+    (t) => t.afterRecordOf === actionId && (t.from === name || t.to === name),
+  );
 }
 
 export function demoReceipt(

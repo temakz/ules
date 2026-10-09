@@ -271,6 +271,13 @@ button.active {
   margin: 6px 0 0;
 }
 
+.snapshot-note {
+  max-width: 620px;
+  font-size: 14px;
+  padding-left: 10px;
+  border-left: 2px solid var(--accent-soft);
+}
+
 .formula {
   color: var(--muted);
   overflow-wrap: anywhere;
