@@ -78,8 +78,12 @@ const output: any = {
   crank: crank.publicKey.toBase58(),
   holders: {},
   actions: [],
+  transfers: [],
   transactions: [],
 };
+
+// Id of the action whose record date has passed while its afterRecord step runs.
+let afterRecordOf: number | null = null;
 
 let settlementMint: PublicKey;
 let issuerKzt: PublicKey;
@@ -373,6 +377,13 @@ async function transfer(from: Person, to: Person, qty: bigint) {
   from.bonds -= qty;
   to.bonds += qty;
   step(`${from.name} transfers ${qty} bonds to ${to.name}`, sig);
+  output.transfers.push({
+    from: from.name,
+    to: to.name,
+    qty: Number(qty),
+    signature: sig,
+    afterRecordOf,
+  });
   check(
     (await bondBalance(from.kp.publicKey)) === from.bonds &&
       (await bondBalance(to.kp.publicKey)) === to.bonds,
@@ -447,7 +458,11 @@ async function runAction(
   const atRecord = holders.map((p) => ({ p, qty: p.bonds }));
 
   await waitForCluster(recordTs);
-  if (opts.afterRecord) await opts.afterRecord();
+  if (opts.afterRecord) {
+    afterRecordOf = id;
+    await opts.afterRecord();
+    afterRecordOf = null;
+  }
 
   const expectedTotal = entitlement(kind, supply, nominal, principal);
   const fundSig = await program.methods
