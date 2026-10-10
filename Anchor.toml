@@ -17,4 +17,8 @@ cluster = "localnet"
 wallet = "~/.config/solana/id.json"
 
 [scripts]
-test = "npx ts-mocha -p ./tsconfig.json -t 1000000 \"tests/**/*.ts\""
+test = "npx ts-mocha -p ./tsconfig.json -t 1000000 --node-option no-experimental-strip-types \"tests/**/*.ts\""
+
+[[test.genesis]]
+address = "2opZy6fred5rQdjREkie4nNqDt6wzPfDrqcmvgaqTZ49"
+program = "target/deploy/ules.so"
