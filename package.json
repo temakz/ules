@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "npm --prefix app run dev",
     "demo": "ts-node scripts/demo.ts",
-    "lint": "prettier */*.ts \"*/**/*{.js,.ts}\" --check",
-    "lint:fix": "prettier */*.ts \"*/**/*{.js,.ts}\" -w"
+    "lint": "prettier */*.ts \"*/**/*{.js,.ts,.tsx,.css}\" --check",
+    "lint:fix": "prettier */*.ts \"*/**/*{.js,.ts,.tsx,.css}\" -w"
   },
   "dependencies": {
     "@anchor-lang/core": "1.1.2",
