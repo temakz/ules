@@ -58,9 +58,13 @@ function SettleLink({
 
   useEffect(() => {
     if (known) return;
+    let cancelled = false;
     settleSignature(receipt.address)
-      .then(setSig)
-      .catch(() => setSig(null));
+      .then((s) => !cancelled && setSig(s))
+      .catch(() => !cancelled && setSig(null));
+    return () => {
+      cancelled = true;
+    };
   }, [known, receipt.address]);
 
   return sig ? (
@@ -76,14 +80,19 @@ export function HolderPage({ bond }: { bond: BondView }) {
   const [inputError, setInputError] = useState<string | null>(null);
   const [data, setData] = useState<HolderReceipts | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
+    let cancelled = false;
     setData(null);
     setError(null);
     loadReceipts(new PublicKey(wallet), bond.actions)
-      .then(setData)
-      .catch((e: Error) => setError(e.message));
-  }, [wallet, bond.actions]);
+      .then((d) => !cancelled && setData(d))
+      .catch((e: Error) => !cancelled && setError(e.message));
+    return () => {
+      cancelled = true;
+    };
+  }, [wallet, bond.actions, attempt]);
 
   function lookUp(e: React.FormEvent) {
     e.preventDefault();
@@ -140,7 +149,10 @@ export function HolderPage({ bond }: { bond: BondView }) {
       <section>
         <h2>Receipts</h2>
         {error ? (
-          <p className="error">Could not read devnet: {error}</p>
+          <div className="notice">
+            <p className="error">Could not read devnet: {error}</p>
+            <button onClick={() => setAttempt((n) => n + 1)}>Retry</button>
+          </div>
         ) : !data ? (
           <p className="muted">Reading receipts from devnet...</p>
         ) : (
