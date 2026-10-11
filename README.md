@@ -4,7 +4,7 @@ Corporate actions for a tokenized bond on Solana: coupon payment, partial early 
 
 Ules (үлес) means "share" or "what is due to you" in Kazakh.
 
-- Live app: https://ules-xi.vercel.app
+- Live app: https://ules-kz.vercel.app
 - Program on devnet: [`2opZy6fred5rQdjREkie4nNqDt6wzPfDrqcmvgaqTZ49`](https://explorer.solana.com/address/2opZy6fred5rQdjREkie4nNqDt6wzPfDrqcmvgaqTZ49?cluster=devnet)
 - Full lifecycle run on devnet: [`demo-output/`](demo-output/)
 
