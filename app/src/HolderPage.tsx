@@ -140,10 +140,13 @@ export function HolderPage({ bond }: { bond: BondView }) {
         <p className="muted">
           {name ?? "Wallet"}{" "}
           <span className="mono">{shortAddress(wallet)}</span>
-          {data && data.receipts.size > 0 && (
-            <> received {kzt(total)} in total</>
-          )}
         </p>
+        {data && data.receipts.size > 0 && (
+          <p className="total">
+            <span className="muted">Received in total</span>
+            <strong className="num">{kzt(total)}</strong>
+          </p>
+        )}
       </section>
 
       <section>

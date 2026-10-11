@@ -293,6 +293,20 @@ button.active {
   border-radius: 2px;
 }
 
+.total {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 14px;
+  margin: 20px 0 0;
+}
+
+.total strong {
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
 .notice button {
   margin-top: 8px;
 }
