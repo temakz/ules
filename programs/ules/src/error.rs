@@ -40,4 +40,6 @@ pub enum UlesError {
     NothingToSettle,
     #[msg("Action can be closed after the payment window or once everyone is paid")]
     CloseTooEarly,
+    #[msg("Partial redemption cannot be announced after redemption")]
+    PartialAfterRedemption,
 }

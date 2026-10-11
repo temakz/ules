@@ -567,6 +567,18 @@ describe("ules", () => {
       await expectError(b.transfer(alice, bob.publicKey, 1), "TransfersHalted");
     });
 
+    it("rejects partial redemption once redemption is announced, but not an earlier coupon", async () => {
+      const b = await bondWith([[alice, 1]]);
+      const now = await chainTime();
+      await b.announce("redemption", now + 3600);
+      await expectError(
+        b.announce("partial", now + 1800, 30_000),
+        "PartialAfterRedemption",
+      );
+      await b.announce("coupon", now + 1800);
+      expect((await b.state()).nominal.toNumber()).to.equal(NOMINAL);
+    });
+
     it("rounds each payment down and returns the remainder to the issuer", async () => {
       // Monthly coupon: 1000 KZT * 10% / 12 = 833.33 KZT per bond.
       const b = await bondWith(

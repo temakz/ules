@@ -28,7 +28,13 @@ pub fn handle_announce_partial_redemption(
     record_ts: i64,
     principal_per_bond: u64,
 ) -> Result<()> {
-    let nominal = ctx.accounts.bond.nominal;
+    let bond = &ctx.accounts.bond;
+    // The redemption has already fixed the full nominal it pays back.
+    require!(
+        bond.halted_from_ts.is_none(),
+        UlesError::PartialAfterRedemption
+    );
+    let nominal = bond.nominal;
     require!(
         principal_per_bond > 0 && principal_per_bond < nominal,
         UlesError::InvalidPrincipal
