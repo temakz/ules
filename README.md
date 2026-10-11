@@ -1,3 +1,5 @@
+<img src="app/public/logo.svg" width="64" alt="Ules symbol">
+
 # Ules
 
 Corporate actions for a tokenized bond on Solana: coupon payment, partial early redemption and redemption at maturity, with the holder register fixed on the record date inside the program.
