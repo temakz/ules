@@ -134,7 +134,7 @@ Redemption has two extra rules:
 Ules follows how bonds are serviced on KASE today:
 
 - **Record date.** The [HCBNb27 prospectus](https://kase.kz/files/emitters/HCBN/hcbnf9_hcbnb27_2026.pdf) pays the coupon to holders registered "at the start of the last day of the period", and the payment follows within 15 calendar days. Ules uses the same record date and a payment window.
-- **Register and payment report.** In Kazakhstan the holder register is kept by the Central Securities Depository. After each payment the issuer sends the depository a list of holders with the amount paid to each. The Ules receipts are that list, on chain and verifiable by anyone, for every action.
+- **Register and payment report.** In Kazakhstan the holder register is kept by the Central Securities Depository. After a redemption payment the issuer sends the depository a list of holders with the amount paid to each. The Ules receipts are that list, on chain and verifiable by anyone, for every action.
 - **Partial redemption by face value.** [SMKFb1](https://kase.kz/ru/investors/bonds/SMKFb1) partially redeemed its bonds on 1 October 2026 by lowering the face value to 778 KZT. Ules does the same: bonds stay with holders, the face value goes down, later coupons follow the new value.
 - **Trading halt.** KASE suspends trading in bonds before an early redemption, and suspends repo trading while a dividend register is being fixed. Ules stops bond transfers from the redemption record date.
 
