@@ -1,4 +1,5 @@
 use anchor_lang::prelude::*;
+use anchor_spl::token_interface::Mint;
 
 use crate::{constants::*, error::UlesError, events::ActionAnnounced, state::*};
 
@@ -6,8 +7,9 @@ use crate::{constants::*, error::UlesError, events::ActionAnnounced, state::*};
 pub struct Announce<'info> {
     #[account(mut)]
     pub issuer: Signer<'info>,
-    #[account(mut, has_one = issuer)]
+    #[account(mut, has_one = issuer, has_one = mint)]
     pub bond: Account<'info, Bond>,
+    pub mint: InterfaceAccount<'info, Mint>,
     #[account(
         init,
         payer = issuer,
@@ -103,10 +105,10 @@ fn announce(
         nominal_at_announce,
         coupon_rate_bps: bond.coupon_rate_bps,
         coupons_per_year: bond.coupons_per_year,
-        // Bonds are burned only when a redemption settles, and every other record
-        // date comes before the redemption record date, so supply cannot change
-        // between this announcement and the record date.
-        supply_at_record: bond.supply,
+        // Owners can burn without the transfer hook, so only the mint has the real
+        // count. A burn after this point lowers that holder's own payment, and the
+        // difference goes back to the issuer on close.
+        supply_at_record: ctx.accounts.mint.supply,
         funded: 0,
         paid: 0,
         settled_qty: 0,

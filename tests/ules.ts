@@ -1,6 +1,7 @@
 import * as anchor from "@anchor-lang/core";
 import { BN, Program } from "@anchor-lang/core";
 import {
+  burn,
   createAccount,
   createAssociatedTokenAccountIdempotent,
   createMint,
@@ -87,7 +88,10 @@ class TestBond {
     readonly bond: PublicKey,
   ) {}
 
-  static async create(couponsPerYear = 2): Promise<TestBond> {
+  static async create(
+    couponsPerYear = 2,
+    payWindowSecs = 3600,
+  ): Promise<TestBond> {
     const mint = Keypair.generate();
     const maturity = (await chainTime()) + 2 * 365 * 24 * 3600;
     await program.methods
@@ -97,7 +101,7 @@ class TestBond {
         couponRateBps: RATE_BPS,
         couponsPerYear,
         maturityTs: new BN(maturity),
-        payWindowSecs: new BN(3600),
+        payWindowSecs: new BN(payWindowSecs),
       })
       .accountsPartial({
         issuer: payer.publicKey,
@@ -189,6 +193,7 @@ class TestBond {
       .accountsPartial({
         issuer: payer.publicKey,
         bond: this.bond,
+        mint: this.mint,
         action: this.action(id),
       })
       .rpc();
@@ -267,6 +272,20 @@ class TestBond {
     await provider.sendAndConfirm(new Transaction().add(ix), [from]);
   }
 
+  async burnOwn(owner: Keypair, qty: number) {
+    await burn(
+      connection,
+      payer,
+      this.ata(owner.publicKey),
+      this.mint,
+      owner,
+      qty,
+      [],
+      {},
+      TOKEN_2022_PROGRAM_ID,
+    );
+  }
+
   state() {
     return program.account.bond.fetch(this.bond);
   }
@@ -295,8 +314,9 @@ class TestBond {
 async function bondWith(
   holdings: [Keypair, number][],
   couponsPerYear = 2,
+  payWindowSecs = 3600,
 ): Promise<TestBond> {
-  const b = await TestBond.create(couponsPerYear);
+  const b = await TestBond.create(couponsPerYear, payWindowSecs);
   for (const [kp, qty] of holdings) {
     await b.register(kp.publicKey);
     if (qty > 0) await b.issue(kp.publicKey, qty);
@@ -580,7 +600,7 @@ describe("ules", () => {
     });
 
     it("rounds each payment down and returns the remainder to the issuer", async () => {
-      // Monthly coupon: 1000 KZT * 10% / 12 = 833.33 KZT per bond.
+      // Monthly coupon: 1000 KZT * 10% / 12 = 833.33 tiyn per bond.
       const b = await bondWith(
         [
           [alice, 1],
@@ -603,6 +623,37 @@ describe("ules", () => {
       await b.close(id);
       expect(issuerStart - (await kzt(payer.publicKey))).to.equal(3 * 833);
       expect("closed" in (await b.actionState(id)).status).to.equal(true);
+    });
+
+    it("funds by mint supply and returns what a holder burned after the record date", async () => {
+      const b = await bondWith(
+        [
+          [alice, 10],
+          [bob, 1],
+        ],
+        2,
+        8,
+      );
+      await b.burnOwn(bob, 1);
+      expect((await b.state()).supply.toNumber()).to.equal(11);
+
+      const recordTs = (await chainTime()) + 2;
+      const id = await b.announce("coupon", recordTs);
+      const issuerStart = await kzt(payer.publicKey);
+      await b.fund(id);
+      const action = await b.actionState(id);
+      expect(action.supplyAtRecord.toNumber()).to.equal(10);
+      expect(action.funded.toNumber()).to.equal(50_000);
+
+      await waitUntil(recordTs);
+      await b.burnOwn(alice, 4);
+      const before = await kzt(alice.publicKey);
+      await b.settle(id, alice.publicKey);
+      expect((await kzt(alice.publicKey)) - before).to.equal(30_000);
+
+      await waitUntil(action.payEndTs.toNumber() + 1);
+      await b.close(id);
+      expect(issuerStart - (await kzt(payer.publicKey))).to.equal(30_000);
     });
   });
 });

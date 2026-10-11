@@ -7,6 +7,7 @@ import {
   ExtensionType,
   getAccount,
   getAssociatedTokenAddressSync,
+  getMint,
   getMintLen,
   getOrCreateAssociatedTokenAccount,
   LENGTH_SIZE,
@@ -431,7 +432,12 @@ async function runAction(
   const before = await program.account.bond.fetch(bond);
   const id = before.nextActionId.toNumber();
   const nominal = BigInt(before.nominal.toString());
-  const supply = BigInt(before.supply.toString());
+  const { supply } = await getMint(
+    connection,
+    bondMint,
+    "confirmed",
+    TOKEN_2022_PROGRAM_ID,
+  );
   const action = actionPda(id);
   const recordTs = (await clusterTime()) + RECORD_DELAY_SECS;
   const ts = new BN(recordTs);
@@ -446,7 +452,7 @@ async function runAction(
           )
         : program.methods.announceRedemption(ts);
   const announceSig = await call
-    .accountsPartial({ issuer: issuer.publicKey, bond, action })
+    .accountsPartial({ issuer: issuer.publicKey, bond, mint: bondMint, action })
     .rpc();
   step(
     `Issuer announces ${kind} #${id}, record date ${new Date(recordTs * 1000).toISOString()}`,
