@@ -13,6 +13,7 @@ import {
   LENGTH_SIZE,
   mintTo,
   TOKEN_2022_PROGRAM_ID,
+  TokenAccountNotFoundError,
   TYPE_SIZE,
 } from "@solana/spl-token";
 import { createInitializeInstruction, pack } from "@solana/spl-token-metadata";
@@ -72,7 +73,51 @@ const holders: Person[] = [
 const [aigerim, bauyrzhan, dana] = holders;
 const crank = Keypair.generate();
 
-const output: any = {
+interface ReceiptOut {
+  holder: string;
+  wallet: string;
+  receipt: string;
+  qty: string;
+  fromSnapshot: boolean;
+  amount: string;
+  signature: string;
+}
+
+interface ActionOut {
+  id: number;
+  kind: Kind;
+  address: string;
+  recordTs: number;
+  nominalAtAnnounce: string;
+  principalPerBond: string;
+  funded: string;
+  paid: string;
+  returned: string;
+  receipts: ReceiptOut[];
+  signatures: { announce: string; fund: string; close: string };
+}
+
+interface DemoOutput {
+  cluster: string;
+  programId: string;
+  issuer: string;
+  crank: string;
+  holders: Record<string, string>;
+  actions: ActionOut[];
+  transfers: {
+    from: string;
+    to: string;
+    qty: number;
+    signature: string;
+    afterRecordOf: number | null;
+  }[];
+  transactions: { step: string; signature: string }[];
+  settlementMint?: string;
+  bondMint?: string;
+  bond?: string;
+}
+
+const output: DemoOutput = {
   cluster: CLUSTER,
   programId: programId.toBase58(),
   issuer: issuer.publicKey.toBase58(),
@@ -170,8 +215,9 @@ async function kztBalance(wallet: PublicKey): Promise<bigint> {
       TOKEN_2022_PROGRAM_ID,
     );
     return acc.amount;
-  } catch {
-    return 0n;
+  } catch (e) {
+    if (e instanceof TokenAccountNotFoundError) return 0n;
+    throw e;
   }
 }
 
@@ -489,7 +535,7 @@ async function runAction(
   );
   check(funded === expectedTotal, `funded ${kzt(funded)} matches the formula`);
 
-  const receipts: any[] = [];
+  const receipts: ReceiptOut[] = [];
   let paid = 0n;
   for (const { p, qty } of atRecord) {
     const wallet = p.kp.publicKey;
