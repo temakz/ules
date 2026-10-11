@@ -32,9 +32,33 @@ function Address({ label, address }: { label: string; address: string }) {
 
 export function BondPage({ bond }: { bond: BondView }) {
   const nominalChanged = bond.nominal !== bond.nominalAtIssue;
+  const paid = bond.actions.reduce((sum, a) => sum + a.paid, 0n);
 
   return (
     <>
+      <section>
+        <div className="section-head">
+          <h2>Lifecycle</h2>
+          {bondStatus(bond) === "Redeemed" && (
+            <span className="muted">Completed demo issue on devnet</span>
+          )}
+        </div>
+        <dl className="terms">
+          {bond.actions.map((a) => (
+            <div key={a.id}>
+              <dt>
+                {a.id}. {kindLabel[a.kind]}
+              </dt>
+              <dd>{kzt(a.paid)}</dd>
+            </div>
+          ))}
+        </dl>
+        <p className="total">
+          <span className="muted">Paid to holders</span>
+          <strong className="num">{kzt(paid)}</strong>
+        </p>
+      </section>
+
       <section>
         <h2>How it works</h2>
         <ol className="how">

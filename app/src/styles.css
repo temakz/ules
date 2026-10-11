@@ -82,6 +82,18 @@ h2 {
   margin: 0 0 16px;
 }
 
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 14px;
+  margin-bottom: 16px;
+}
+
+.section-head h2 {
+  margin: 0;
+}
+
 .muted {
   color: var(--muted);
 }
