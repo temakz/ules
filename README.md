@@ -40,7 +40,7 @@ Example from the demo run:
 3. Bauyrzhan sends 3 bonds to Dana. The hook sees that the record date has passed and saves Bauyrzhan's 7 and Dana's 3 before the transfer.
 4. The coupon pays Bauyrzhan for 7 bonds and Dana for 3, although after the transfer they hold 4 and 6.
 
-On devnet: [the bond](https://explorer.solana.com/address/Fdw3aauWivHvbYm5VhsF919DEKAB2aEsZDCV4ev3JeTy?cluster=devnet), [Bauyrzhan's transfer to Dana](https://explorer.solana.com/tx/4dBam6y8iJYLVYEEHKLfy3gqNKDtmpBYUz6h1P4gt9cSEMwf6qUT7fupKscDhFeEEgfNLd9YDP17dFGuv6KC3vRd?cluster=devnet).
+On devnet: [the bond](https://explorer.solana.com/address/8MamwQKi6Xf11Dzd2Q88XQJV5Q4pm2YehvosyjgiH6SJ?cluster=devnet), [Bauyrzhan's transfer to Dana](https://explorer.solana.com/tx/3MQKaHdugUH4QX17mQEyMwUu9BuytcSpXC6joCBg6cKqBsUcAdKVBfpnxpenCGbsa5NLV4HqbrWiKzk43s9AR2AE?cluster=devnet).
 
 ## Architecture
 
@@ -83,7 +83,7 @@ The program emits an event on announce, fund, settle and close.
 - The hook checks the `transferring` flag, so it cannot be called outside a real transfer.
 - A holder has 4 snapshot slots, one per open action. A slot frees up when its action is closed, so no cleanup is needed.
 
-A hooked transfer costs 34k to 46k compute units.
+A hooked transfer costs 34k to 48k compute units.
 
 ## Entitlement math
 
@@ -95,7 +95,7 @@ partial redemption = qty * principal_per_bond
 redemption         = qty * face_value + coupon for the last period
 ```
 
-- The amount to fund uses the same function with the full supply, and `floor(a + b) >= floor(a) + floor(b)`, so the vault always covers every holder.
+- The amount to fund uses the same function with the mint supply at announcement, and `floor(a + b) >= floor(a) + floor(b)`, so the vault always covers every holder.
 - What rounding leaves in the vault goes back to the issuer when the action is closed. A test with three holders and 2,500 tiyn funded pays 3 x 833 and returns 1 tiyn.
 - Amounts per bond are fixed at announcement. A partial redemption lowers the face value right away, and the next coupon announced after it is computed on the new face value.
 
@@ -112,10 +112,11 @@ announce -> record date -> fund -> settle (once per holder) -> close
 - Payments are accepted until the end of the payment window. On KASE this window is 15 days. The demo uses 120 seconds.
 - `close_action` works after the window ends or when every bond has been settled.
 
-Redemption has two extra rules:
+Redemption has three extra rules:
 
 - From its record date on, bond transfers are rejected, much like KASE suspends trading in bonds before an early redemption.
 - `settle` burns the holder's bonds through the permanent delegate. The burn does not go through the hook, so before burning the program writes the snapshots the hook would have written. An unpaid coupon whose record date has passed still pays the right amount after the bonds are gone. There is a test for exactly this case.
+- After a redemption is announced, no new partial redemption can be announced.
 
 ## Implemented and simulated
 
@@ -141,6 +142,7 @@ Ules follows how bonds are serviced on KASE today:
 ## Limitations
 
 - An action that was announced but never funded cannot be closed and keeps its slot. In practice this is an issuer default, and default handling is outside this prototype.
+- Token-2022 lets an owner burn their own bonds without calling the transfer hook. A burn after the record date lowers that holder's own payment, and the difference goes back to the issuer when the action is closed. A production version would freeze bond accounts and route every transfer through the program.
 - One bond per run, devnet only.
 - The app is read only. The demo script plays the issuer and the payment bot.
 
@@ -148,7 +150,7 @@ Ules follows how bonds are serviced on KASE today:
 
 Requirements: Rust, Solana CLI 3.x, Anchor 1.1.x, Node 22.
 
-Tests on a local validator, 13 of them:
+Tests on a local validator, 15 of them:
 
 ```
 npm install
