@@ -1,0 +1,362 @@
+{
+  "cluster": "devnet",
+  "programId": "2opZy6fred5rQdjREkie4nNqDt6wzPfDrqcmvgaqTZ49",
+  "issuer": "4GMBqF1Qu4MxrwX6aN58wZKZ7BEErcjKTovvzHDzSRQ6",
+  "crank": "SrdPfawUyW5TacQwoV5vzghQERBVFGTVBhpvXEGFTjm",
+  "holders": {
+    "Aigerim": "JBrTA7BTbPZZLwFgDDvu74wKABb4myJ4KdH1i5SowqVk",
+    "Bauyrzhan": "AYmtvgquoM4p8Hh5jFKZXiDXsHvcWaQAxCSJ6GYmbddy",
+    "Dana": "5nFitHLd1c9uTYsPeNaJ5B7ghoPy4E2ghtpSyHPDrEKA"
+  },
+  "actions": [
+    {
+      "id": 1,
+      "kind": "coupon",
+      "address": "DTuwKPYXeFDett7wymPZVvfo2Hue9rJjHHecXLxhjbwd",
+      "recordTs": 1791722386,
+      "nominalAtAnnounce": "100000",
+      "principalPerBond": "0",
+      "funded": "90000",
+      "paid": "90000",
+      "returned": "0",
+      "receipts": [
+        {
+          "holder": "Aigerim",
+          "wallet": "JBrTA7BTbPZZLwFgDDvu74wKABb4myJ4KdH1i5SowqVk",
+          "receipt": "6HBYoFW1YY15sxWyg3hyytUGmcJPKEhBnLbqHZQF6ZaA",
+          "qty": "8",
+          "fromSnapshot": false,
+          "amount": "40000",
+          "signature": "2uZHTZ1gTAEHBKQpq1FtoPhGFZLybz9Snhumqr2GWiUV5UHRYMfmTpEqQum6joLVDHHvEJxeeg2M5bZHhY26Ki8g"
+        },
+        {
+          "holder": "Bauyrzhan",
+          "wallet": "AYmtvgquoM4p8Hh5jFKZXiDXsHvcWaQAxCSJ6GYmbddy",
+          "receipt": "CDmWeYWDT1MWFonH6SAaMEoaC5MAJGkfWk6pyAunr7Gw",
+          "qty": "7",
+          "fromSnapshot": true,
+          "amount": "35000",
+          "signature": "4qoug1LWywEtooGe37FTCEpv3ZnLcyerRd2RvnWUbgviSNN13EPjzNi87tvHPouH3Nb6tsQjyVpk3WVwM4tCRw77"
+        },
+        {
+          "holder": "Dana",
+          "wallet": "5nFitHLd1c9uTYsPeNaJ5B7ghoPy4E2ghtpSyHPDrEKA",
+          "receipt": "HzNbeD1QnBPzCfbhvniebyvqbgxn8tjsyuGdmb8XPv6X",
+          "qty": "3",
+          "fromSnapshot": true,
+          "amount": "15000",
+          "signature": "5EpoyrCNDPJcMDnVM4b7S4Aok5LpQQU7B4WBt4HuDWnJR7pdyBmQhtduTF83P3uZtxFmrS5zjRfRvyQ4qYsUhBWT"
+        }
+      ],
+      "signatures": {
+        "announce": "2T9xoHTCyTzVR2z359tPBsMjHwKaTX7Fpa5sqcevkoQnydvWzYXYgDXJSeknFs5bL4kXqLu6U9reQkRTzDmC2Dst",
+        "fund": "2eWWCqcjS7EAmyqU3NMRFg93Kcq11WEGPV6PeEgdzdkiYr3rvs25aJMbfY2yf3VWBta5jdVoScfnNZQLfTpPy57W",
+        "close": "2FYVVRb93YNF4Wd7BDcv7VyFfegDSJL1NhTuxxq8wJGdQdkkNGGxuL929vS6vxSrJcARDajggQrXZPHJEMUVwTDQ"
+      }
+    },
+    {
+      "id": 2,
+      "kind": "partial",
+      "address": "EhbmTrrSfEgNhw9n9oQ2wGNAvpQD3nSdzL2vM9SVdpdx",
+      "recordTs": 1791722426,
+      "nominalAtAnnounce": "100000",
+      "principalPerBond": "30000",
+      "funded": "540000",
+      "paid": "540000",
+      "returned": "0",
+      "receipts": [
+        {
+          "holder": "Aigerim",
+          "wallet": "JBrTA7BTbPZZLwFgDDvu74wKABb4myJ4KdH1i5SowqVk",
+          "receipt": "hMZq12rD3HCKxs4wPNdzbnRSEXX2gxDXBcmzrMJhD6R",
+          "qty": "8",
+          "fromSnapshot": false,
+          "amount": "240000",
+          "signature": "3hnm1FWmjxvFxMfgZfL5XY9AqncS1nSsnDScfeWBc5mShoBMV6ZWjj6AfREbvgQk7YQRZnTwWT7hL2XS1nK7U4ef"
+        },
+        {
+          "holder": "Bauyrzhan",
+          "wallet": "AYmtvgquoM4p8Hh5jFKZXiDXsHvcWaQAxCSJ6GYmbddy",
+          "receipt": "BNP1BSv1F7ao5BNNzsEQ9ZxBx8Lx45JCMbLhJ4Zs55bU",
+          "qty": "4",
+          "fromSnapshot": false,
+          "amount": "120000",
+          "signature": "sVipcSt714b4UPXT3dDPdkEoubTrLRZE9L2ddqbzGhniWx86F9iCMpvH87UkCuZBSN37Kd4xj3GEtjJQCyfWDhS"
+        },
+        {
+          "holder": "Dana",
+          "wallet": "5nFitHLd1c9uTYsPeNaJ5B7ghoPy4E2ghtpSyHPDrEKA",
+          "receipt": "95onaSDpLSyQKbvhFruj5mBgyQoxjnSSE5zMhn9rsLtP",
+          "qty": "6",
+          "fromSnapshot": false,
+          "amount": "180000",
+          "signature": "5W5BPmBN5k3dAVjUov2hoQ5fJx7H4D2eDmHpPC1Q7DCmxsiD125HBUNn2v4Y75rx2cF4CQR5qhn7Lt8wVov4x2GW"
+        }
+      ],
+      "signatures": {
+        "announce": "4CioEK9ECGKXMJhxpozherVAQ3jTvZPQMuthUhGAwfzeNqHPEvqP4QCFe3zv2ePw64Teh4X4iQCVAbhgbENS2Rob",
+        "fund": "4LXSvHbjBkPe2hrkqTXdk1DGjP57sqZ5av9w2mXTSJf8UJwzvUiz6LaRqKRXor5XzbKKhEpaRvFPKsNh7dvy9sqz",
+        "close": "2q21oqTuBnpzx6dWgj6WVDySxxscJg9HUTuMjW1ywk3nerusUKxhV5vv1cpCmXudYdVHwExHFXCiTVn2sALepJgD"
+      }
+    },
+    {
+      "id": 3,
+      "kind": "coupon",
+      "address": "EfoweAA4y2mnK4rmNNQQ5bSDriwDABAkXkjHsN3D4WFm",
+      "recordTs": 1791722465,
+      "nominalAtAnnounce": "70000",
+      "principalPerBond": "0",
+      "funded": "63000",
+      "paid": "63000",
+      "returned": "0",
+      "receipts": [
+        {
+          "holder": "Aigerim",
+          "wallet": "JBrTA7BTbPZZLwFgDDvu74wKABb4myJ4KdH1i5SowqVk",
+          "receipt": "9smUj2DwAGhfpeoTt5Bi8NS6bibemUEXe6RF1Hsow4bX",
+          "qty": "8",
+          "fromSnapshot": false,
+          "amount": "28000",
+          "signature": "27MzcNV2YSQ45SXx8oxKesdr6iSAeeQLkVDKFgJPYCEPoEskMcRFQB94anxQxTsTpWykupsAMQkTPV1Qnjmo13V1"
+        },
+        {
+          "holder": "Bauyrzhan",
+          "wallet": "AYmtvgquoM4p8Hh5jFKZXiDXsHvcWaQAxCSJ6GYmbddy",
+          "receipt": "BkinXgJQP7nvRwezG5wWYkgZH5tEcDMDNhpGhjUKNGAw",
+          "qty": "4",
+          "fromSnapshot": false,
+          "amount": "14000",
+          "signature": "WYWo2snYBboakJqrtiogVLMuMzdbSxxG5neLBiZ5EDfUSoWMsz8R6BuM1P7GE38EXHq5RjDnS2Pgqui7HBAKijY"
+        },
+        {
+          "holder": "Dana",
+          "wallet": "5nFitHLd1c9uTYsPeNaJ5B7ghoPy4E2ghtpSyHPDrEKA",
+          "receipt": "Gqme6RHVYmxXgjJcFMczuFKuS8QGXSJcihRCU9hvDeXp",
+          "qty": "6",
+          "fromSnapshot": false,
+          "amount": "21000",
+          "signature": "4YfebxvA4jeNNV7zyyUXHbWgkXvkhfgxpxg9ktBaqX3WHpY4PMBGgGm7Xaxc91NVw55XxiCkZkcjfKezATPuTfxn"
+        }
+      ],
+      "signatures": {
+        "announce": "2giM1jJ2pE8xHJPkqaGbqCCSDS11HSFMnTnn75WZeM3PT9wBZ5fgHmNAktRoX13G6MFgSAT4i6bpA6kk7uh7rv3J",
+        "fund": "4JMD5gkuEMR7PXNJUjUfBrQkPBwkTAMLdUQ3sHc3RccAho9dJMJYuUL3m41L8jfXWKh4bDULAqpRxVLzTduucBBc",
+        "close": "4zUmWvahVKjKUWsh3owrNCyhy5BtsVCQqoaVHs2CJXvkNuCSVbqoMCDGcr4sRAH6qHxrka99Y2yvh4ud7i9qCjKK"
+      }
+    },
+    {
+      "id": 4,
+      "kind": "redemption",
+      "address": "CoPdUrzxqr75NmfmuUFNwjrW3a6XZ297ugDNnEbsuE2",
+      "recordTs": 1791722499,
+      "nominalAtAnnounce": "70000",
+      "principalPerBond": "0",
+      "funded": "1323000",
+      "paid": "1323000",
+      "returned": "0",
+      "receipts": [
+        {
+          "holder": "Aigerim",
+          "wallet": "JBrTA7BTbPZZLwFgDDvu74wKABb4myJ4KdH1i5SowqVk",
+          "receipt": "3q4Pa7fTjNEfqcGP8BeFJDXoop9GE5XtyA9ZZs2E3QcP",
+          "qty": "8",
+          "fromSnapshot": false,
+          "amount": "588000",
+          "signature": "5D3VwmV37RRtNBe4rTUZkgajm3s6CBjQNfX3eBEgUFD43rCDzWk4GzomAyCVqMptSkhfvNbEqMZRCFbtsrwWhBCQ"
+        },
+        {
+          "holder": "Bauyrzhan",
+          "wallet": "AYmtvgquoM4p8Hh5jFKZXiDXsHvcWaQAxCSJ6GYmbddy",
+          "receipt": "6isFtEwJ1Qqm2fv9DDxaDJDG2xNdHGrNBq7xw5XULzfG",
+          "qty": "4",
+          "fromSnapshot": false,
+          "amount": "294000",
+          "signature": "66om35TxEG8vSWXHvZbxEiwGAETRVnGPLcgpdQbHV7N6P6sRMQu8JjJigPSLKskLbVcrzJAVvEsVnt7GZCnEYFxM"
+        },
+        {
+          "holder": "Dana",
+          "wallet": "5nFitHLd1c9uTYsPeNaJ5B7ghoPy4E2ghtpSyHPDrEKA",
+          "receipt": "HHaEHDXWk6ZhYFCYSF76K5FDYUrjj17Qmg788DkP3t36",
+          "qty": "6",
+          "fromSnapshot": false,
+          "amount": "441000",
+          "signature": "5HPdjb97ewjccUXijGyvaUS9wHmkdVuE7jYo34FWpKppeqYpms1RGhewTefAmLruYbao2NTPRCqUVaTaMgDmrMN"
+        }
+      ],
+      "signatures": {
+        "announce": "3cDNz6TtCSy8EzyKaff6mG5mdTfSTpC18hSSqXR2jqcHhmZ476hp89oCmTumvwLCfNMNh95iEmLMsEmKyPu9zCce",
+        "fund": "5MHWMU2xAFk22VV3iPC5h9UjieqyT8tUf4nyo4b9ysEduhUxYTfB5HiPZFqkvmu3o21VnbtFgwU9JXc6wExFj9Df",
+        "close": "nPVefq1YJossqVubuoxvFL73ED3Wi3Xw7oP7GUxGHpbtZCirUoQfWvZMXrjPiXyJZwdCxxKqwGzW1Zmh5EX3ter"
+      }
+    }
+  ],
+  "transfers": [
+    {
+      "from": "Aigerim",
+      "to": "Bauyrzhan",
+      "qty": 2,
+      "signature": "3VbSJfMrsHDGXUo2ayNjnd42N9YpzhLGkc6PLBE1gyEyaqbJCM7mbRas98DxReTdec45MDdXZMWzDdJt26u9NSC4",
+      "afterRecordOf": null
+    },
+    {
+      "from": "Bauyrzhan",
+      "to": "Dana",
+      "qty": 3,
+      "signature": "3MQKaHdugUH4QX17mQEyMwUu9BuytcSpXC6joCBg6cKqBsUcAdKVBfpnxpenCGbsa5NLV4HqbrWiKzk43s9AR2AE",
+      "afterRecordOf": 1
+    }
+  ],
+  "transactions": [
+    {
+      "step": "Create tKZT test tenge mint nEBFVuyD95wW7Z6ovv64TD4tK864mW5rt3rUyLRgeWE",
+      "signature": "5C8ZSnnpUY9sh434KLxdRDQaJLRGPvMK7ETSggmVQLonvg3tqAE91cFbcK3pJJyDopoKytzoFrFYBDRrsyWqRFm"
+    },
+    {
+      "step": "Issuer mints 50,000.00 KZT to itself",
+      "signature": "aYL7F7HyiMPeKqNQbjQtNhviQT5CAbr5z4qNRrosS2Btg5VsvmYpp1y5MKiCebgWPWByfpt5uU3vEa4AkpzWvSs"
+    },
+    {
+      "step": "Create bond: 1,000 KZT nominal, 10% a year, 2 coupons, mint Fz2jvSxST2JPT6d2a4q5aFJVMJQKYNpgS8wMREcP93dN",
+      "signature": "49hkdf94BxexwRxxcVCqksinC8qLfYFFkg7Yo5uAcVfLtgHW6fwt6uApus1n8tnsQimAimTshD6mC95EjYjiqJt3"
+    },
+    {
+      "step": "Send SOL for fees to the holders and the crank",
+      "signature": "3Los3QjDSCCpXtdQGz3BRjCZVQdauwaMkPM1NEyX3y9i9JiXL8ETbUMa4wbfs6ZqZgUi4qfNkBooFfzYtjrU174u"
+    },
+    {
+      "step": "Registrar registers Aigerim JBrTA7BTbPZZLwFgDDvu74wKABb4myJ4KdH1i5SowqVk",
+      "signature": "2p5sH7pYCKewZNxFyGqc5sRUQwNreYQgGjA41fLiZEfAD7eqeRZq9fhGh9HKsgK2HDMWUDU7CHnfGRBeJeuF8WfZ"
+    },
+    {
+      "step": "Issue 10 bonds to Aigerim",
+      "signature": "5UV7R42CaVsDFSRDT3JWMQ56HTMtVMFhXcm27P9WeRfoWZy3p9GW5FhMz1yJcM5dpEMcNYeTYRjkSD8gTiAuCaxF"
+    },
+    {
+      "step": "Registrar registers Bauyrzhan AYmtvgquoM4p8Hh5jFKZXiDXsHvcWaQAxCSJ6GYmbddy",
+      "signature": "4dWaYsUgAsPSEkwZ5a73tNmKFtZCim4hJwThCWBZnmygUHGEjQKEYHyLCAu9LB2Tozpq1eUp4htY8nmcpoQhkDpP"
+    },
+    {
+      "step": "Issue 5 bonds to Bauyrzhan",
+      "signature": "4Z9YToVLfa2KNZghE7ETJzc1ySBvviot4MueAiMNmTGW1a5mLitbQcHDMpxLDT17JADjCeTAx16zm1tdLndDVsjc"
+    },
+    {
+      "step": "Registrar registers Dana 5nFitHLd1c9uTYsPeNaJ5B7ghoPy4E2ghtpSyHPDrEKA",
+      "signature": "48PKSvcNGfCEid5xbgejDeysxVHwutoDy4w4pXG5AcCPSZVHhZS6y5Ca6kuwaxe1gm3zEiKecbXwtFxnk1hTffCZ"
+    },
+    {
+      "step": "Issue 3 bonds to Dana",
+      "signature": "4SdvedYbKjt1muHtgX1PQCVDSD5d7Py2e1ok6k65AuuYJ8X85rqVxCcvdbD1PvdftDbrhtsnxBKDsJQY8Hczc7N1"
+    },
+    {
+      "step": "Aigerim transfers 2 bonds to Bauyrzhan",
+      "signature": "3VbSJfMrsHDGXUo2ayNjnd42N9YpzhLGkc6PLBE1gyEyaqbJCM7mbRas98DxReTdec45MDdXZMWzDdJt26u9NSC4"
+    },
+    {
+      "step": "Issuer announces coupon #1, record date 2026-10-11T12:39:46.000Z",
+      "signature": "2T9xoHTCyTzVR2z359tPBsMjHwKaTX7Fpa5sqcevkoQnydvWzYXYgDXJSeknFs5bL4kXqLu6U9reQkRTzDmC2Dst"
+    },
+    {
+      "step": "Bauyrzhan transfers 3 bonds to Dana",
+      "signature": "3MQKaHdugUH4QX17mQEyMwUu9BuytcSpXC6joCBg6cKqBsUcAdKVBfpnxpenCGbsa5NLV4HqbrWiKzk43s9AR2AE"
+    },
+    {
+      "step": "Issuer funds 900.00 KZT for 18 bonds",
+      "signature": "2eWWCqcjS7EAmyqU3NMRFg93Kcq11WEGPV6PeEgdzdkiYr3rvs25aJMbfY2yf3VWBta5jdVoScfnNZQLfTpPy57W"
+    },
+    {
+      "step": "Crank settles Aigerim: 8 bonds on record date, 400.00 KZT",
+      "signature": "2uZHTZ1gTAEHBKQpq1FtoPhGFZLybz9Snhumqr2GWiUV5UHRYMfmTpEqQum6joLVDHHvEJxeeg2M5bZHhY26Ki8g"
+    },
+    {
+      "step": "Crank settles Bauyrzhan: 7 bonds on record date (snapshot), 350.00 KZT",
+      "signature": "4qoug1LWywEtooGe37FTCEpv3ZnLcyerRd2RvnWUbgviSNN13EPjzNi87tvHPouH3Nb6tsQjyVpk3WVwM4tCRw77"
+    },
+    {
+      "step": "Crank settles Dana: 3 bonds on record date (snapshot), 150.00 KZT",
+      "signature": "5EpoyrCNDPJcMDnVM4b7S4Aok5LpQQU7B4WBt4HuDWnJR7pdyBmQhtduTF83P3uZtxFmrS5zjRfRvyQ4qYsUhBWT"
+    },
+    {
+      "step": "Issuer closes coupon #1: paid 900.00 KZT, returned 0.00 KZT",
+      "signature": "2FYVVRb93YNF4Wd7BDcv7VyFfegDSJL1NhTuxxq8wJGdQdkkNGGxuL929vS6vxSrJcARDajggQrXZPHJEMUVwTDQ"
+    },
+    {
+      "step": "Issuer announces partial #2, record date 2026-10-11T12:40:26.000Z",
+      "signature": "4CioEK9ECGKXMJhxpozherVAQ3jTvZPQMuthUhGAwfzeNqHPEvqP4QCFe3zv2ePw64Teh4X4iQCVAbhgbENS2Rob"
+    },
+    {
+      "step": "Issuer funds 5,400.00 KZT for 18 bonds",
+      "signature": "4LXSvHbjBkPe2hrkqTXdk1DGjP57sqZ5av9w2mXTSJf8UJwzvUiz6LaRqKRXor5XzbKKhEpaRvFPKsNh7dvy9sqz"
+    },
+    {
+      "step": "Crank settles Aigerim: 8 bonds on record date, 2,400.00 KZT",
+      "signature": "3hnm1FWmjxvFxMfgZfL5XY9AqncS1nSsnDScfeWBc5mShoBMV6ZWjj6AfREbvgQk7YQRZnTwWT7hL2XS1nK7U4ef"
+    },
+    {
+      "step": "Crank settles Bauyrzhan: 4 bonds on record date, 1,200.00 KZT",
+      "signature": "sVipcSt714b4UPXT3dDPdkEoubTrLRZE9L2ddqbzGhniWx86F9iCMpvH87UkCuZBSN37Kd4xj3GEtjJQCyfWDhS"
+    },
+    {
+      "step": "Crank settles Dana: 6 bonds on record date, 1,800.00 KZT",
+      "signature": "5W5BPmBN5k3dAVjUov2hoQ5fJx7H4D2eDmHpPC1Q7DCmxsiD125HBUNn2v4Y75rx2cF4CQR5qhn7Lt8wVov4x2GW"
+    },
+    {
+      "step": "Issuer closes partial #2: paid 5,400.00 KZT, returned 0.00 KZT",
+      "signature": "2q21oqTuBnpzx6dWgj6WVDySxxscJg9HUTuMjW1ywk3nerusUKxhV5vv1cpCmXudYdVHwExHFXCiTVn2sALepJgD"
+    },
+    {
+      "step": "Issuer announces coupon #3, record date 2026-10-11T12:41:05.000Z",
+      "signature": "2giM1jJ2pE8xHJPkqaGbqCCSDS11HSFMnTnn75WZeM3PT9wBZ5fgHmNAktRoX13G6MFgSAT4i6bpA6kk7uh7rv3J"
+    },
+    {
+      "step": "Issuer funds 630.00 KZT for 18 bonds",
+      "signature": "4JMD5gkuEMR7PXNJUjUfBrQkPBwkTAMLdUQ3sHc3RccAho9dJMJYuUL3m41L8jfXWKh4bDULAqpRxVLzTduucBBc"
+    },
+    {
+      "step": "Crank settles Aigerim: 8 bonds on record date, 280.00 KZT",
+      "signature": "27MzcNV2YSQ45SXx8oxKesdr6iSAeeQLkVDKFgJPYCEPoEskMcRFQB94anxQxTsTpWykupsAMQkTPV1Qnjmo13V1"
+    },
+    {
+      "step": "Crank settles Bauyrzhan: 4 bonds on record date, 140.00 KZT",
+      "signature": "WYWo2snYBboakJqrtiogVLMuMzdbSxxG5neLBiZ5EDfUSoWMsz8R6BuM1P7GE38EXHq5RjDnS2Pgqui7HBAKijY"
+    },
+    {
+      "step": "Crank settles Dana: 6 bonds on record date, 210.00 KZT",
+      "signature": "4YfebxvA4jeNNV7zyyUXHbWgkXvkhfgxpxg9ktBaqX3WHpY4PMBGgGm7Xaxc91NVw55XxiCkZkcjfKezATPuTfxn"
+    },
+    {
+      "step": "Issuer closes coupon #3: paid 630.00 KZT, returned 0.00 KZT",
+      "signature": "4zUmWvahVKjKUWsh3owrNCyhy5BtsVCQqoaVHs2CJXvkNuCSVbqoMCDGcr4sRAH6qHxrka99Y2yvh4ud7i9qCjKK"
+    },
+    {
+      "step": "Issuer announces redemption #4, record date 2026-10-11T12:41:39.000Z",
+      "signature": "3cDNz6TtCSy8EzyKaff6mG5mdTfSTpC18hSSqXR2jqcHhmZ476hp89oCmTumvwLCfNMNh95iEmLMsEmKyPu9zCce"
+    },
+    {
+      "step": "Aigerim tries to transfer 1 bond to Dana: rejected as expected",
+      "signature": "974dTxErXZ5SweXcwnqnTG2Yf9xoWMDUWgs5fw7MjsdBhtXgfRcfm4WfcMdmCV721aZt8GMVFA9bVd1tKST9QFa"
+    },
+    {
+      "step": "Issuer funds 13,230.00 KZT for 18 bonds",
+      "signature": "5MHWMU2xAFk22VV3iPC5h9UjieqyT8tUf4nyo4b9ysEduhUxYTfB5HiPZFqkvmu3o21VnbtFgwU9JXc6wExFj9Df"
+    },
+    {
+      "step": "Crank settles Aigerim: 8 bonds on record date, 5,880.00 KZT",
+      "signature": "5D3VwmV37RRtNBe4rTUZkgajm3s6CBjQNfX3eBEgUFD43rCDzWk4GzomAyCVqMptSkhfvNbEqMZRCFbtsrwWhBCQ"
+    },
+    {
+      "step": "Crank settles Bauyrzhan: 4 bonds on record date, 2,940.00 KZT",
+      "signature": "66om35TxEG8vSWXHvZbxEiwGAETRVnGPLcgpdQbHV7N6P6sRMQu8JjJigPSLKskLbVcrzJAVvEsVnt7GZCnEYFxM"
+    },
+    {
+      "step": "Crank settles Dana: 6 bonds on record date, 4,410.00 KZT",
+      "signature": "5HPdjb97ewjccUXijGyvaUS9wHmkdVuE7jYo34FWpKppeqYpms1RGhewTefAmLruYbao2NTPRCqUVaTaMgDmrMN"
+    },
+    {
+      "step": "Issuer closes redemption #4: paid 13,230.00 KZT, returned 0.00 KZT",
+      "signature": "nPVefq1YJossqVubuoxvFL73ED3Wi3Xw7oP7GUxGHpbtZCirUoQfWvZMXrjPiXyJZwdCxxKqwGzW1Zmh5EX3ter"
+    }
+  ],
+  "settlementMint": "nEBFVuyD95wW7Z6ovv64TD4tK864mW5rt3rUyLRgeWE",
+  "bondMint": "Fz2jvSxST2JPT6d2a4q5aFJVMJQKYNpgS8wMREcP93dN",
+  "bond": "8MamwQKi6Xf11Dzd2Q88XQJV5Q4pm2YehvosyjgiH6SJ"
+}
