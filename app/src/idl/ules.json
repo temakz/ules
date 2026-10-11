@@ -33,6 +33,12 @@
           "writable": true
         },
         {
+          "name": "mint",
+          "relations": [
+            "bond"
+          ]
+        },
+        {
           "name": "action",
           "writable": true,
           "pda": {
@@ -96,6 +102,12 @@
         {
           "name": "bond",
           "writable": true
+        },
+        {
+          "name": "mint",
+          "relations": [
+            "bond"
+          ]
         },
         {
           "name": "action",
@@ -165,6 +177,12 @@
         {
           "name": "bond",
           "writable": true
+        },
+        {
+          "name": "mint",
+          "relations": [
+            "bond"
+          ]
         },
         {
           "name": "action",
@@ -1422,6 +1440,11 @@
       "code": 6018,
       "name": "CloseTooEarly",
       "msg": "Action can be closed after the payment window or once everyone is paid"
+    },
+    {
+      "code": 6019,
+      "name": "PartialAfterRedemption",
+      "msg": "Partial redemption cannot be announced after redemption"
     }
   ],
   "types": [

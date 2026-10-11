@@ -28,6 +28,10 @@ export type Ules = {
           writable: true;
         },
         {
+          name: "mint";
+          relations: ["bond"];
+        },
+        {
           name: "action";
           writable: true;
           pda: {
@@ -73,6 +77,10 @@ export type Ules = {
         {
           name: "bond";
           writable: true;
+        },
+        {
+          name: "mint";
+          relations: ["bond"];
         },
         {
           name: "action";
@@ -124,6 +132,10 @@ export type Ules = {
         {
           name: "bond";
           writable: true;
+        },
+        {
+          name: "mint";
+          relations: ["bond"];
         },
         {
           name: "action";
@@ -1160,6 +1172,11 @@ export type Ules = {
       code: 6018;
       name: "closeTooEarly";
       msg: "Action can be closed after the payment window or once everyone is paid";
+    },
+    {
+      code: 6019;
+      name: "partialAfterRedemption";
+      msg: "Partial redemption cannot be announced after redemption";
     },
   ];
   types: [
