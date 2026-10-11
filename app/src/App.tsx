@@ -31,7 +31,10 @@ export function App() {
   return (
     <div className="page">
       <header className="masthead">
-        <h1>Ules</h1>
+        <h1>
+          <img className="mark" src="/logo.svg" alt="" />
+          Ules
+        </h1>
         <p>Corporate actions for a tokenized KZT bond on Solana devnet.</p>
       </header>
 

@@ -49,6 +49,12 @@ a:hover {
   margin: 0;
 }
 
+.masthead .mark {
+  height: 0.69em;
+  width: auto;
+  margin-right: 0.2em;
+}
+
 .masthead p {
   margin: 4px 0 0;
   color: var(--muted);
